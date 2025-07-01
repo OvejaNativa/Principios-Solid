@@ -2,7 +2,29 @@
 Explicación del principio SOLID grupal.
 - S ------> Ariel
 - O  -----> Pacha
-- L ------> Yesibeth
+- L ------> Yesibet
+
+✅ L - Liskov Substitution Principle (LSP)
+🧠 Explicación simple: Las clases hijas deben poder reemplazar a la clase madre sin alterar su comportamiento esperado.
+
+🪄 Analogía: Un lapicero con tinta negra reemplaza a uno azul sin cambiar la forma de escribir.
+
+💻 Nuevo ejemplo en Java:
+
+class Empleado {
+    public double calcularPago() {
+        return 1000.0;
+    }
+}
+
+class EmpleadoPorHora extends Empleado {
+    public double calcularPago() {
+        return 20 * 10; // 20 horas * $10
+    }
+}
+➡ Comentario: EmpleadoPorHora puede reemplazar a Empleado y su método funciona correctamente.
+
+
 - I ------> Catalina
 - D ------> Carolina
 
