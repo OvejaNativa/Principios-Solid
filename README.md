@@ -128,7 +128,8 @@ class EmpleadoPorHora extends Empleado {
     }
 }
 ➡ Comentario: EmpleadoPorHora puede reemplazar a Empleado y su método funciona correctamente.
-✅ I– Interface Segregation Principle (ISP)
+
+✅ I – Interface Segregation Principle (ISP)
 ✂️ Mejor muchas interfaces pequeñas que una gigante.
 
 ❌ Mal diseño:
@@ -178,11 +179,4 @@ public class ProcesadorDePedido {
 }
 ➡️ ProcesadorDePedido no sabe si se paga con tarjeta, efectivo o pixie dust. Solo necesita algo que implemente MetodoPago.
 
-RESUMEN
 
-Letra	Principio	Qué significa
-S	Single Responsibility Principle	Una clase debe tener una única responsabilidad o motivo de cambio.
-O	Open/Closed Principle	El software debe estar abierto a extensión, pero cerrado a modificación.
-L	Liskov Substitution Principle	Las clases hijas deben poder reemplazar a sus clases padre sin errores.
-I	Interface Segregation Principle	Es mejor tener interfaces específicas que una interfaz gigante.
-D	Dependency Inversion Principle	Las clases deben depender de abstracciones, no de implementaciones concretas.
