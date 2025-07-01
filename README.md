@@ -3,6 +3,21 @@ Explicación del principio SOLID grupal.
 - S ------> Ariel
 - O  -----> Pacha
 - L ------> Yesibet
+- I ------> Catalina
+- D ------> Carolina
+
+SOLID es un conjunto de 5 principios de diseño en la programación orientada a objetos. Su objetivo es ayudarte a escribir código que sea:
+
+📦 Fácil de mantener
+
+🧩 Reutilizable
+
+🛠️ Escalable
+
+🔄 Fácil de testear y modificar sin romper otras partes del sistema
+
+El nombre viene de las iniciales en inglés de cada principio:
+
 
 ✅ S - Principio de responsabilidad única
 
@@ -113,19 +128,61 @@ class EmpleadoPorHora extends Empleado {
     }
 }
 ➡ Comentario: EmpleadoPorHora puede reemplazar a Empleado y su método funciona correctamente.
+✅ I– Interface Segregation Principle (ISP)
+✂️ Mejor muchas interfaces pequeñas que una gigante.
 
+❌ Mal diseño:
 
-- I ------> Catalina
-- D ------> Carolina
+java
+public interface Servicio {
+    void pagar();
+    void enviarNotificacion();
+    void registrarCliente();
+}
+➡️ ¿Y si una clase solo quiere notificar y no pagar? La estás forzando.
 
-SOLID es un conjunto de 5 principios de diseño en la programación orientada a objetos. Su objetivo es ayudarte a escribir código que sea:
+✅ Buen diseño:
 
-📦 Fácil de mantener
+java
+public interface ServicioPago { void pagar(double monto); }
+public interface ServicioNotificacion { void notificar(String mensaje); }
+Así solo implementas lo que necesitas.
 
-🧩 Reutilizable
+✅  D – Dependency Inversion Principle (DIP)
+🔌 Depende de abstracciones, no de implementaciones.
 
-🛠️ Escalable
+java
+public interface MetodoPago {
+    void pagar(double monto);
+}
 
-🔄 Fácil de testear y modificar sin romper otras partes del sistema
+public class PagoConTarjeta implements MetodoPago {
+    public void pagar(double monto) {
+        System.out.println("Pagando con tarjeta: $" + monto);
+    }
+}
+Y el procesador de pedidos:
 
-El nombre viene de las iniciales en inglés de cada principio:
+java
+public class ProcesadorDePedido {
+    private MetodoPago metodo;
+
+    public ProcesadorDePedido(MetodoPago metodo) {
+        this.metodo = metodo;
+    }
+
+    public void procesar(Pedido pedido) {
+        double total = new CalculadorTotal().calcular(pedido);
+        metodo.pagar(total);
+    }
+}
+➡️ ProcesadorDePedido no sabe si se paga con tarjeta, efectivo o pixie dust. Solo necesita algo que implemente MetodoPago.
+
+RESUMEN
+
+Letra	Principio	Qué significa
+S	Single Responsibility Principle	Una clase debe tener una única responsabilidad o motivo de cambio.
+O	Open/Closed Principle	El software debe estar abierto a extensión, pero cerrado a modificación.
+L	Liskov Substitution Principle	Las clases hijas deben poder reemplazar a sus clases padre sin errores.
+I	Interface Segregation Principle	Es mejor tener interfaces específicas que una interfaz gigante.
+D	Dependency Inversion Principle	Las clases deben depender de abstracciones, no de implementaciones concretas.
